@@ -29,5 +29,33 @@ public class GithubTest {
                 shouldBe(visible);
         $("#user-content-3-using-junit5-extend-test-class").ancestor("h4").sibling(0).
                 $$(".highlight span").shouldHave(sizeGreaterThan(0));
+        $("#user-content-3-using-junit5-extend-test-class").ancestor("h4").sibling(0)
+                .shouldHave(text("@ExtendWith({SoftAssertsExtension.class})\n" +
+                        "class Tests {\n" +
+                        "  @Test\n" +
+                        "  void test() {\n" +
+                        "    Configuration.assertionMode = SOFT;\n" +
+                        "    open(\"page.html\");\n" +
+                        "\n" +
+                        "    $(\"#first\").should(visible).click();\n" +
+                        "    $(\"#second\").should(visible).click();\n" +
+                        "  }\n" +
+                        "}"));
+        $("#user-content-3-using-junit5-extend-test-class").ancestor("h4").sibling(2)
+                .shouldHave(text("class Tests {\n" +
+                        "  @RegisterExtension \n" +
+                        "  static SoftAssertsExtension softAsserts = new SoftAssertsExtension();\n" +
+                        "\n" +
+                        "  @Test\n" +
+                        "  void test() {\n" +
+                        "    Configuration.assertionMode = SOFT;\n" +
+                        "    open(\"page.html\");\n" +
+                        "\n" +
+                        "    $(\"#first\").should(visible).click();\n" +
+                        "    $(\"#second\").should(visible).click();\n" +
+                        "  }\n" +
+                        "}"));
+
     }
+
 }
